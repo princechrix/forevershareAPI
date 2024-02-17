@@ -2,8 +2,8 @@ const { createUser, getAllUser, getUserByUserId, getUserByUsername, login } = re
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation")
 
-
-router.post('/users',checkToken, createUser);
+ 
+router.post('/users', createUser);
 router.get('/users',checkToken, getAllUser);
 router.get('/users/:id',checkToken,  getUserByUserId)
 router.get('/users/s/:username',checkToken, getUserByUsername)

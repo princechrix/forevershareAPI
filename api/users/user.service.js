@@ -42,11 +42,12 @@ module.exports = {
     pool.query(
       `SELECT * FROM users WHERE username = ?`, 
       [username], 
-      (error, results) => {
+      (error, results, fields) => {
         if(error) {
           return callback(error)
         } 
-        return callback(null, results)
+        // console.log(results)
+        return callback(null, results[0])
       }
     )
   },
@@ -56,7 +57,16 @@ module.exports = {
   login: (data, callback) => {
     pool.query(
       `SELECT * FROM users WHERE username = ? AND password = ?`, 
-      []
+      [
+        data.username,
+        data.password
+      ], 
+      (err, results) => {
+        if(err) {
+          return callback(err)
+        } 
+        return callback(null, results)
+      }
     )
   }
   
