@@ -1,3 +1,4 @@
+const { json } = require("express");
 const { createTopic, getTopics } = require("./topic.service");
 
 module.exports = {
@@ -18,4 +19,28 @@ module.exports = {
         })
     })
   },
+  topics: (req, res) => {
+    getTopics((err, results) => {
+      if(err) {
+        return res.status(500).json({
+          success: false, 
+          message: "Failed to Fetch Topics"
+        })
+      } 
+
+      if(results[0] != null) {
+        return res.status(200).json({
+          success: true, 
+          data: results
+        })
+      } else {
+        return res.status(200).json({
+          success: true, 
+          data: "No Topics Available now!"
+        })
+      }
+
+
+    })
+  }
 };
