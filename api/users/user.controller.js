@@ -115,6 +115,7 @@ module.exports = {
         return res.json({
           success: true,
           data: "Logged in Successfully",
+          userId: results.user_id,
           token: jsontoken,
         });
       } else {
